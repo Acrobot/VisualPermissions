@@ -1,5 +1,6 @@
 package com.Acrobot.VisualPermissions;
 
+
 import javax.swing.*;
 import java.io.File;
 
@@ -9,15 +10,18 @@ import java.io.File;
 public class Main {
     public static MainForm mf;
 
-    public static void main(String[] args) throws Exception {
-        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+    public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+        }
 
         JFrame frame = new JFrame("VisualPermissions by Acrobot");
         mf = new MainForm();
         frame.setContentPane(mf.mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //frame.pack();
-        frame.setSize(600,500);
+        frame.setSize(600, 500);
         frame.setVisible(true);
 
         mf.groups.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -43,6 +47,10 @@ public class Main {
         String toReturn = (String) JOptionPane.showInputDialog(null, message, title, JOptionPane.PLAIN_MESSAGE, null, null, "");
         if (toReturn != null && toReturn.isEmpty()) showInputDialog(message, "You didn't type in anything!");
         return toReturn;
+    }
+
+    public static String showListDialog(String message, String title, Object... possibilities) {
+        return (String) JOptionPane.showInputDialog(null, message, title, JOptionPane.PLAIN_MESSAGE, null, possibilities, possibilities[0]);
     }
 
     public static File openChooserDialog() {

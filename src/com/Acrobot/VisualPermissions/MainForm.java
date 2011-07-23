@@ -1,17 +1,6 @@
 package com.Acrobot.VisualPermissions;
 
-import com.Acrobot.VisualPermissions.Buttons.add.addGroupPermission;
-import com.Acrobot.VisualPermissions.Buttons.add.addGroupPressed;
-import com.Acrobot.VisualPermissions.Buttons.add.addPlayerGroup;
-import com.Acrobot.VisualPermissions.Buttons.add.addPlayerPressed;
-import com.Acrobot.VisualPermissions.Buttons.loadButtonPressed;
-import com.Acrobot.VisualPermissions.Buttons.remove.removeGroupPressed;
-import com.Acrobot.VisualPermissions.Buttons.remove.removePermissionPressed;
-import com.Acrobot.VisualPermissions.Buttons.remove.removePlayerGroup;
-import com.Acrobot.VisualPermissions.Buttons.remove.removePlayerPressed;
-import com.Acrobot.VisualPermissions.Buttons.saveButtonPressed;
-import com.Acrobot.VisualPermissions.Lists.groupListPressed;
-import com.Acrobot.VisualPermissions.Lists.playerListPressed;
+import com.Acrobot.VisualPermissions.Plugins.pluginChooser;
 
 import javax.swing.*;
 
@@ -19,41 +8,52 @@ import javax.swing.*;
  * @author Acrobot
  */
 public class MainForm {
-    private JTabbedPane tabs;
+    public JTabbedPane tabs;
     public JPanel mainPanel;
-    private JPanel Players;
-    private JPanel Groups;
-    private JButton saveButton;
-    private JButton loadButton;
+    public JPanel Players;
+    public JPanel Groups;
+    public JButton saveButton;
+    public JButton loadButton;
     public JList gPermissions;
     public JList pGroups;
     public JList players;
     public JList groups;
-    private JButton addPlayerButton;
-    private JButton removePlayerButton;
-    private JButton addPlayerGroupButton;
-    private JButton removePlayerGroupButton;
-    private JButton addGroupButton;
-    private JButton removeGroupButton;
-    private JButton addGroupPermissionButton;
-    private JButton removeGroupPermissionButton;
+    public JButton addPlayerButton;
+    public JButton removePlayerButton;
+    public JButton addPlayerGroupButton;
+    public JButton removePlayerGroupButton;
+    public JButton addGroupButton;
+    public JButton removeGroupButton;
+    public JButton addGroupPermissionButton;
+    public JButton removeGroupPermissionButton;
+    public JComboBox permissionsPlugin;
+    public JButton newConfigurationButton;
 
     public MainForm() {
-        loadButton.addActionListener(new loadButtonPressed());
-        saveButton.addActionListener(new saveButtonPressed());
+        permissionsPlugin.addActionListener(new pluginChooser());
+        ButtonPress buttonListener = new ButtonPress();
 
-        addGroupButton.addActionListener(new addGroupPressed());
-        removeGroupButton.addActionListener(new removeGroupPressed());
-        addPlayerButton.addActionListener(new addPlayerPressed());
-        removePlayerButton.addActionListener(new removePlayerPressed());
+        saveButton.addActionListener(buttonListener);
+        loadButton.addActionListener(buttonListener);
+        newConfigurationButton.addActionListener(buttonListener);
 
-        groups.addListSelectionListener(new groupListPressed());
-        players.addListSelectionListener(new playerListPressed());
+        addPlayerButton.addActionListener(buttonListener);
+        removePlayerButton.addActionListener(buttonListener);
 
-        addPlayerGroupButton.addActionListener(new addPlayerGroup());
-        removePlayerGroupButton.addActionListener(new removePlayerGroup());
+        addGroupButton.addActionListener(buttonListener);
+        removeGroupButton.addActionListener(buttonListener);
 
-        removeGroupPermissionButton.addActionListener(new removePermissionPressed());
-        addGroupPermissionButton.addActionListener(new addGroupPermission());
+        addGroupPermissionButton.addActionListener(buttonListener);
+        removeGroupPermissionButton.addActionListener(buttonListener);
+
+        addPlayerGroupButton.addActionListener(buttonListener);
+        removePlayerGroupButton.addActionListener(buttonListener);
+
+        ListClick listListener = new ListClick();
+        groups.addListSelectionListener(listListener);
+        players.addListSelectionListener(listListener);
+
+        gPermissions.addListSelectionListener(listListener);
+        pGroups.addListSelectionListener(listListener);
     }
 }
